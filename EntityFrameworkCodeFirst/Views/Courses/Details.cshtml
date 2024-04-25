@@ -1,0 +1,32 @@
+@model EntityFrameworkCodeFirst.Models.ViewModels.CourseDetailsViewModel
+
+@{
+ViewData["Title"] = "Courses Details";
+}
+
+<div class="py-3 mb-4 border-bottom">
+    <h2>Course Name: <strong>@Model.Name</strong></h2>
+    <h4>Teacher: <strong>@Model.Teacher.Person.FirstName @Model.Teacher.Person.LastName</strong></h4>
+</div>
+
+<div class="mt-4">
+    <h4>Students:</h4>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        @foreach(var student in Model.Students)
+        {
+        <tr>
+            <td>@student.Id</td>
+            <td>@student.Person.FirstName @student.Person.LastName</td>
+        </tr>
+        }
+        </tbody>
+    </table>
+</div>

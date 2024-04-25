@@ -1,0 +1,31 @@
+@model List<EntityFrameworkCodeFirst.Models.ViewModels.CourseViewModel>
+
+@{
+ViewData["Title"] = "Courses Overview";
+}
+
+<h2>Courses Overview</h2>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    
+    <tbody>
+    @foreach(var course in Model.OrderBy(m => m.Id))
+    {
+    <tr>
+        <td>@course.Id</td>
+        <td>@course.Name</td>
+        <td class="d-flex gap-2">
+            <a asp-action="Edit" asp-controller="Courses" asp-route-id="@course.Id" class="btn btn-outline-primary">Edit</a>
+            <a asp-action="Details" asp-controller="Courses" asp-route-id="@course.Id" class="btn btn btn-outline-secondary">Details</a>
+        </td>
+    </tr>
+    }
+    </tbody>
+</table>

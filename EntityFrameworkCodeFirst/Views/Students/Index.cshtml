@@ -1,0 +1,33 @@
+@model System.Collections.Generic.List<EntityFrameworkCodeFirst.Models.ViewModels.StudentViewModel>
+
+@{
+    ViewData["Title"] = "Students Overview";
+}
+
+<h2>Students Overview</h2>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Teacher(s)</th>
+    </tr>
+    </thead>
+    
+    <tbody>
+    @foreach(var item in Model.OrderBy(m => m.Student.Id))
+    {
+        <tr>
+            <td>@item.Student.Id</td>
+            <td>@item.Student.Person.FirstName @item.Student.Person.LastName</td>
+            <td class="d-flex flex-column">
+                @foreach (var teacher in item.Teachers)
+                {
+                    <strong>@teacher.Person.FirstName @teacher.Person.LastName</strong>
+                }
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

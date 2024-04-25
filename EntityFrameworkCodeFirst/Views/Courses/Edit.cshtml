@@ -1,0 +1,32 @@
+@model EntityFrameworkCodeFirst.Models.ViewModels.EditCourseViewModel
+
+@{
+ViewData["Title"] = "Edit Course";
+}
+
+<form asp-action="Edit" asp-controller="Courses" method="post" class="d-flex flex-column m-auto" style="max-width: 600px">
+    <h2 class="mb-3">Editing Course: <strong>@Model.Name</strong></h2>
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <input type="hidden" name="CurrentTeacher" value="@Model.CurrentTeacher" />
+    <input type="hidden" name="Teachers" value="@Model.Teachers" />
+
+    <label for="teacher">Teacher</label>
+    <select class="mb-3 form-control" id="teacher" name="NewTeacherId">
+        @foreach (var teacher in Model.Teachers)
+        {
+        if (teacher.Id == Model.CurrentTeacher.Id)
+        {
+        <option value="@teacher.Id" selected>@teacher.Person.FirstName @teacher.Person.LastName</option>
+        }
+        else
+        {
+        <option value="@teacher.Id">@teacher.Person.FirstName @teacher.Person.LastName</option>
+        }
+        }
+    </select>
+    
+    <label for="name">Name</label>
+    <input class="mb-3" id="name" type="text" name="Name" value="@Model.Name">
+
+    <input class="btn btn-primary w-100" type="submit" value="Save"/>
+</form>
